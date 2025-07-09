@@ -1,55 +1,22 @@
-# Prerequisites
-*.d
+#include <stdio.h>
 
-# Object files
-*.o
-*.ko
-*.obj
-*.elf
+int main() {
+    int p;
+    scanf("%d", &p);
 
-# Linker output
-*.ilk
-*.map
-*.exp
+    long long dp[31][3]; 
 
-# Precompiled Headers
-*.gch
-*.pch
+    dp[1][1] = 2; 
+    dp[1][2] = 0;
 
-# Libraries
-*.lib
-*.a
-*.la
-*.lo
+    for (int i = 2; i <= p; i++) {
+        
+        dp[i][1] = dp[i - 1][1] + dp[i - 1][2];
+        dp[i][2] = dp[i - 1][1];
+    }
 
-# Shared objects (inc. Windows DLLs)
-*.dll
-*.so
-*.so.*
-*.dylib
+    long long result = dp[p][1] + dp[p][2];
+    printf("%lld\n", result);
 
-# Executables
-*.exe
-*.out
-*.app
-*.i*86
-*.x86_64
-*.hex
-
-# Debug files
-*.dSYM/
-*.su
-*.idb
-*.pdb
-
-# Kernel Module Compile Results
-*.mod*
-*.cmd
-.tmp_versions/
-modules.order
-Module.symvers
-Mkfile.old
-dkms.conf
-
-# debug information files
-*.dwo
+    return 0;
+}
